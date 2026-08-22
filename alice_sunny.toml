@@ -1,0 +1,109 @@
+# interface
+"ui.background" = "bg1"
+"ui.text" = "txt1"
+
+"ui.cursor" = { fg = "txt2", bg = "acc1" }
+"ui.selection" = { fg = "txt2", bg = "acc2" }
+
+# lines
+"ui.linenr" = "comm"
+"ui.linenr.selected" = "acc1"
+
+# status line
+
+"ui.statusline" = { fg = "txt2", bg = "acc2" }
+"ui.statusline.normal" = { fg = "txt2", bg = "blue" }
+"ui.statusline.insert" = { fg = "txt2", bg = "red" }
+"ui.statusline.select" = { fg = "txt2", bg = "green" }
+"ui.statusline.inactive" = { fg = "txt1", bg = "bg2" }
+
+# buffer line
+"ui.bufferline" = { fg = "txt2", bg = "acc2" }
+"ui.bufferline.active" = { fg = "txt2", bg = "acc1" }
+"ui.bufferline.background" = { fg = "txt2", bg = "bg2" }
+
+# windows
+"ui.popup" = { bg = "bg2" }
+
+# menu
+"ui.menu" = { bg = "bg2" }
+"ui.menu.selected" = { fg = "txt2", bg = "acc2" }
+
+# hints
+warning = "warn"
+error = "err"
+info = "info"
+hint = "hint"
+
+# diagnostic
+# legacy
+"diagnostic" = { fg = "black", bg = "red", underline = { color = "red", style = "curl" } }
+"diagnostic.hint" = { fg = "black", bg = "cyan", underline = { color = "cyan", style = "line" } }
+"diagnostic.info" = { fg = "black", bg = "green", underline = { color = "green", style = "line" } } 
+"diagnostic.warning" = { fg = "black", bg = "yellow", underline = { color = "yellow", style = "curl" } }
+"diagnostic.error" = { fg = "black", bg = "red", underline = { color = "red", style = "curl" } }
+
+# code
+string = "str"
+"constant.numeric" = "num"
+comment = { fg = "comm", modifiers = ["italic"] }
+
+type = "acc1"
+"type.builtin" = { fg = "acc1", modifiers = ["italic"] }
+
+variable = "acc2"
+constant = "acc3"
+"variable.builtin" = { fg = "acc2", modifiers = ["italic"] }
+function = "acc2"
+"function.builtin" = { fg = "acc2", modifiers = ["italic"] }
+constructor = "acc2"
+
+tag = "acc3"
+"tag.builtin" = { fg = "acc3", modifiers = ["italic"] }
+
+keyword = { fg = "acc3", modifiers = ["italic"] }
+namespace = "acc3"
+label = "acc3"
+
+"diff.plus" = { bg = "info" }
+"diff.minus" = { bg = "err" }
+
+[palette]
+bg1 = "#f0f8ff"
+bg2 = "#dae2e9"
+
+txt1 = "#3b3b3b"
+txt2 = "#ffffff"
+
+acc1 = "#56a0d1"
+acc2 = "#789eb1"
+acc3 = "#cba0e3" # purple
+
+str = "#7fad9c"
+num = "#cfb886"
+
+comm = "#8a8a8a"
+
+warn = "#cfb886"
+err = "#c998ae"
+info = "#7fad9c"
+hint = "#789eb1"
+
+red = "#C998AE"
+green = "#7FAD9C"
+yellow = "#CFB886"
+blue = "#56A0D1"
+magenta = "#CBA0E3"
+cyan = "#789eb1"
+gray = "#C2C2C2"
+
+# currently for terminal ansi 16 colors only
+light-red = "#D6ABBC"
+light-green = "#93B89F"
+light-yellow = "#C4B290"
+light-blue = "#7DB0D6"
+light-magenta = "#C0A3DE"
+light-cyan = "#98BECF"
+light-gray = "#D4D4D4"
+
+# TODO: dim colors
