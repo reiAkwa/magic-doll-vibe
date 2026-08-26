@@ -1,0 +1,23 @@
+{
+  "name": "rainy",
+  "displayName": "Alice Rainy",
+  "description": "Alice Rainy color theme (Alice series)",
+  "version": "1.0.0",
+  "publisher": "theme-new",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Alice Rainy",
+        "uiTheme": "vs-dark",
+        "path": "./themes/alice-rainy-color-theme.json"
+      }
+    ]
+  }
+}

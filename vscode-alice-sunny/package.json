@@ -1,0 +1,23 @@
+{
+  "name": "alice-sunny",
+  "displayName": "Alice Sunny",
+  "description": "Alice Sunny light color theme (ported from the Helix theme)",
+  "version": "1.0.0",
+  "publisher": "theme-new",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Alice Sunny",
+        "uiTheme": "vs",
+        "path": "./themes/alice-sunny-color-theme.json"
+      }
+    ]
+  }
+}

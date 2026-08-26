@@ -1,0 +1,160 @@
+# Alice Nightly - dark theme
+# interface
+"ui.background" = "bg1"
+"ui.background.separator" = { bg = "bg2" }
+"ui.text" = "txt1"
+"ui.text.focus" = { bg = "bg2" }
+"ui.text.inactive" = "comm"
+"ui.text.directory" = "acc1"
+
+"ui.gutter" = "bg1"
+"ui.gutter.selected" = { fg = "acc1" }
+
+"ui.cursor" = { fg = "txt2", bg = "acc1" }
+"ui.cursor.match" = { fg = "txt2", bg = "green" }
+"ui.selection" = { fg = "txt2", bg = "acc2" }
+"ui.selection.primary" = { fg = "txt2", bg = "acc1" }
+
+# cursor line
+"ui.cursorline.primary" = { bg = "bg2" }
+"ui.cursorline.secondary" = { bg = "bg2" }
+
+# search / debug highlight
+"ui.highlight" = { fg = "black", bg = "yellow" }
+"ui.highlight.frameline" = { bg = "err" }
+
+# lines
+"ui.linenr" = "comm"
+"ui.linenr.selected" = "acc1"
+
+# virtual
+"ui.virtual.indent-guide" = "gray"
+"ui.virtual.whitespace" = "gray"
+"ui.virtual.ruler" = "gray"
+"ui.virtual.inlay-hint" = { fg = "comm", modifiers = ["dim"] }
+"ui.virtual.jump-label" = { fg = "txt2", bg = "acc1" }
+"ui.virtual.wrap" = "comm"
+
+# status line
+
+"ui.statusline" = { fg = "txt2", bg = "acc2" }
+"ui.statusline.normal" = { fg = "txt2", bg = "blue" }
+"ui.statusline.insert" = { fg = "txt2", bg = "red" }
+"ui.statusline.select" = { fg = "txt2", bg = "green" }
+"ui.statusline.inactive" = { fg = "txt1", bg = "bg2" }
+"ui.statusline.separator" = "comm"
+
+# buffer line
+"ui.bufferline" = { fg = "txt2", bg = "acc2" }
+"ui.bufferline.active" = { fg = "txt2", bg = "acc1" }
+"ui.bufferline.background" = { fg = "txt1", bg = "bg2" }
+
+# windows
+"ui.popup" = { bg = "bg2" }
+"ui.help" = { bg = "bg2" }
+"ui.window" = "comm"
+
+# menu
+"ui.menu" = { bg = "bg2" }
+"ui.menu.selected" = { fg = "txt2", bg = "acc2" }
+"ui.menu.scroll" = { fg = "acc1", bg = "bg2" }
+
+# picker
+"ui.picker.header" = { fg = "comm" }
+"ui.picker.header.column" = { fg = "comm" }
+"ui.picker.header.column.active" = "acc1"
+
+# debug
+"ui.debug.breakpoint" = { fg = "err" }
+"ui.debug.active" = { bg = "info" }
+
+# hints
+warning = "warn"
+error = "err"
+info = "info"
+hint = "hint"
+
+# diagnostic
+# legacy
+"diagnostic" = { fg = "black", bg = "red", underline = { color = "red", style = "curl" } }
+"diagnostic.hint" = { fg = "black", bg = "cyan", underline = { color = "cyan", style = "line" } }
+"diagnostic.info" = { fg = "black", bg = "green", underline = { color = "green", style = "line" } }
+"diagnostic.warning" = { fg = "black", bg = "yellow", underline = { color = "yellow", style = "curl" } }
+"diagnostic.error" = { fg = "black", bg = "red", underline = { color = "red", style = "curl" } }
+"diagnostic.unnecessary" = { fg = "comm", modifiers = ["dim"] }
+"diagnostic.deprecated" = { underline = { color = "comm", style = "line" } }
+
+# code
+string = "str"
+"constant.numeric" = "num"
+comment = { fg = "comm", modifiers = ["italic"] }
+
+type = "acc1"
+"type.builtin" = { fg = "acc1", modifiers = ["italic"] }
+
+variable = "acc2"
+constant = "acc3"
+"variable.builtin" = { fg = "acc2", modifiers = ["italic"] }
+function = "acc2"
+"function.builtin" = { fg = "acc2", modifiers = ["italic"] }
+constructor = "acc2"
+
+tag = "acc3"
+"tag.builtin" = { fg = "acc3", modifiers = ["italic"] }
+
+keyword = { fg = "acc3", modifiers = ["italic"] }
+namespace = "acc3"
+label = "acc3"
+
+"diff.plus" = { bg = "info" }
+"diff.minus" = { bg = "err" }
+
+# rainbow brackets (nesting levels, cycle)
+rainbow = [
+  "acc1", # 0  blue
+  "acc3", # 1  purple
+  "str",  # 2  green
+  "num",  # 3  gold
+  "err",  # 4  rose
+  "comm", # 5  neutral
+]
+
+[palette]
+bg1 = "#090e12"
+bg2 = "#161b20"
+
+txt1 = "#e0e5ea"
+txt2 = "#f6f9fb"
+
+acc1 = "#56a0d1"
+acc2 = "#5b7f92"
+acc3 = "#a280cb" # purple (brightened for dark)
+
+str = "#50bf9b"
+num = "#d2a652"
+
+comm = "#8f9396"
+
+warn = "#d7a03d"
+err = "#cf84a5"
+info = "#50bf9b"
+hint = "#5b7f92"
+
+red = "#d99fb5"
+green = "#5fc7a5"
+yellow = "#d9ae55"
+blue = "#56a0d1"
+magenta = "#b591d4"
+cyan = "#69b6cc"
+gray = "#232d35"
+
+# bright variants: on a dark theme "bright" = one step lighter
+light-red = "#e9b6c9"
+light-green = "#7fd6b7"
+light-yellow = "#ecc16f"
+light-blue = "#7eb9e0"
+light-magenta = "#cfa9e8"
+light-cyan = "#92cfdf"
+light-gray = "#f0f5f8"
+
+# TODO: dim colors

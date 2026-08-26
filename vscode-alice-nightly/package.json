@@ -1,0 +1,23 @@
+{
+  "name": "nightly",
+  "displayName": "Alice Nightly",
+  "description": "Alice Nightly color theme (Alice series)",
+  "version": "1.0.0",
+  "publisher": "theme-new",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Alice Nightly",
+        "uiTheme": "vs-dark",
+        "path": "./themes/alice-nightly-color-theme.json"
+      }
+    ]
+  }
+}
