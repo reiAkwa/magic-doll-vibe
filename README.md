@@ -1,6 +1,6 @@
-# Alice 系列
+# Alice 系列（magic-doll-vibe）
 
-一个以 **AliceBlue** 家族为底，**90%为Vibe coding生成**的终端/编辑器配色系列，覆盖 Helix、WezTerm、Zed、VS Code、OpenCode、Claude Code、JetBrains、Vim/Neovim 八个平台，各平台保持同一套调色板与视觉语言。
+一个以 **AliceBlue** 家族为底，**90% 为 Vibe coding 生成**的终端/编辑器配色系列，覆盖 8 个平台，各平台保持同一套调色板与视觉语言。
 
 仅自用，不喜勿喷！
 
@@ -59,29 +59,44 @@
 
 bright 与基色**同明度、高饱和**；WezTerm/Zed 的 dim 档为 OKLCH L−0.06 的衍生色。
 
-## 文件结构
+## 目录结构
+
+按平台分目录，主题文件统一命名 `alice-sunny` / `alice-rainy` / `alice-nightly`：
 
 ```
-# 浅色 Alice Sunny
-helix_alice_sunny.toml          Helix 初版（留档）
-helix_alice_sunny_oklch.toml    Helix 当前版（推荐）
-wezterm_alice_sunny.toml        WezTerm 配色（含 indexed 256 色）
-zed_alice_sunny.json            Zed 配色
-vscode-alice-sunny/             VS Code 扩展（可直接安装）
-opencode_alice_sunny.json       OpenCode 配色
-claude_alice_sunny.json         Claude Code 配色
-jetbrains_alice_sunny.icls      JetBrains 编辑器配色
-
-# 深色 Alice Rainy / Alice Nightly（全平台）
-helix_alice_rainy.toml / helix_alice_nightly.toml
-wezterm_alice_rainy.toml / wezterm_alice_nightly.toml
-zed_alice_rainy.json / zed_alice_nightly.json
-vscode-alice-rainy/ / vscode-alice-nightly/
-opencode_alice_rainy.json / opencode_alice_nightly.json
-claude_alice_rainy.json / claude_alice_nightly.json
-jetbrains_alice_rainy.icls / jetbrains_alice_nightly.icls
-vim-alice/colors/               Vim / Neovim 通用配色（三主题，含常见插件高亮）
-vim-alice/lua/lualine/themes/   lualine.nvim 主题（三主题）
+magic-doll-vibe/
+├── helix/
+│   ├── alice-sunny.toml
+│   ├── alice-rainy.toml
+│   ├── alice-nightly.toml
+│   └── legacy/alice-sunny-v1.toml     # 初版留档（旧调色板，勿用）
+├── wezterm/
+│   ├── alice-sunny.toml
+│   ├── alice-rainy.toml
+│   └── alice-nightly.toml
+├── zed/
+│   ├── alice-sunny.json
+│   ├── alice-rainy.json
+│   └── alice-nightly.json
+├── vscode/
+│   ├── alice-sunny/                   # VS Code 扩展（可直接安装）
+│   ├── alice-rainy/
+│   └── alice-nightly/
+├── opencode/
+│   ├── alice-sunny.json
+│   ├── alice-rainy.json
+│   └── alice-nightly.json
+├── claude/
+│   ├── alice-sunny.json
+│   ├── alice-rainy.json
+│   └── alice-nightly.json
+├── jetbrains/
+│   ├── alice-sunny.icls
+│   ├── alice-rainy.icls
+│   └── alice-nightly.icls
+└── vim/                               # Vim 与 Neovim 通用
+    ├── colors/alice-{sunny,rainy,nightly}.vim
+    └── lua/lualine/themes/alice-{sunny,rainy,nightly}.lua
 ```
 
 ## 深色主题
@@ -99,27 +114,37 @@ Alice Rainy 与 Alice Nightly 共享深色设计，仅明度/饱和度不同：
 | err | `#ba829a` | `#cf84a5` |
 | acc1 / acc2 / acc3 | `#56a0d1` / `#5b7f92` / `#a280cb` | 同左 |
 
-深色下选区/光标/状态栏走"彩底 + 浅字"（acc2 底 + 白字对比 4.29）；ANSI bright 采用常规"更亮"约定。Rainy 偏向低饱和阴天观感，Nightly 偏深黑高对比。
+深色下选区/光标/状态栏走"彩底 + 浅字"；ANSI bright 采用常规"更亮"约定。Rainy 偏低饱和阴天观感，Nightly 偏深黑高对比。
+
+---
 
 ## 安装
 
-### Helix
+下文每个平台都给出 **macOS / Linux** 与 **Windows (PowerShell)** 两种方式。`<repo>` 指本仓库克隆/解压后的根目录。
 
-把主题文件放进 themes 目录（文件名即主题名）：
-
-```powershell
-# Windows
-Copy-Item helix_alice_sunny_oklch.toml "$env:APPDATA\helix\themes\"
-Copy-Item helix_alice_rainy.toml, helix_alice_nightly.toml "$env:APPDATA\helix\themes\"
-
-# Linux / macOS
-cp helix_alice_sunny_oklch.toml helix_alice_rainy.toml helix_alice_nightly.toml ~/.config/helix/themes/
+```bash
+git clone https://github.com/reiAkwa/magic-doll-vibe.git
 ```
 
-`config.toml`：
+### Helix
+
+主题名 = 文件名（去 `.toml`），即 `alice-sunny` / `alice-rainy` / `alice-nightly`。
+
+```bash
+# macOS / Linux
+mkdir -p ~/.config/helix/themes
+cp <repo>/helix/*.toml ~/.config/helix/themes/
+```
+```powershell
+# Windows
+New-Item -ItemType Directory -Force "$env:APPDATA\helix\themes" | Out-Null
+Copy-Item <repo>\helix\*.toml "$env:APPDATA\helix\themes\"
+```
+
+`~/.config/helix/config.toml`（Windows 为 `%APPDATA%\helix\config.toml`）：
 
 ```toml
-theme = "helix_alice_sunny_oklch"   # 或 helix_alice_rainy / helix_alice_nightly
+theme = "alice-sunny"      # 或 alice-rainy / alice-nightly
 
 [editor]
 cursorline = true          # 可选：光标行底色
@@ -128,92 +153,136 @@ rainbow-brackets = true    # 可选：彩虹括号
 
 ### WezTerm
 
-在 `wezterm.lua` 里指向本仓库目录即可：
+把 `wezterm/` 目录直接加进搜索路径（无需复制）：
 
 ```lua
+-- ~/.config/wezterm/wezterm.lua  (Windows: %USERPROFILE%\.config\wezterm\wezterm.lua)
 local wezterm = require 'wezterm'
 local config = {}
 
-config.color_scheme_dirs = { 'C:/Users/reiakwa/Documents/code/theme-new' }
-config.color_scheme = 'wezterm_alice_sunny'   -- 或 wezterm_alice_rainy / wezterm_alice_nightly
+config.color_scheme_dirs = { '<repo>/wezterm' }   -- Windows 用正斜杠，如 'C:/path/to/magic-doll-vibe/wezterm'
+config.color_scheme = 'alice-sunny'               -- 或 alice-rainy / alice-nightly
 
 return config
 ```
 
-或把 toml 放进 `~/.config/wezterm/colors/`。
+或复制进全局配色目录：
+
+```bash
+mkdir -p ~/.config/wezterm/colors && cp <repo>/wezterm/*.toml ~/.config/wezterm/colors/
+```
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\wezterm\colors" | Out-Null
+Copy-Item <repo>\wezterm\*.toml "$env:USERPROFILE\.config\wezterm\colors\"
+```
 
 ### Zed
 
+```bash
+mkdir -p ~/.config/zed/themes && cp <repo>/zed/*.json ~/.config/zed/themes/
+```
 ```powershell
-Copy-Item zed_alice_sunny.json "$env:USERPROFILE\.config\zed\themes\zed_alice_sunny.json"
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\zed\themes" | Out-Null
+Copy-Item <repo>\zed\*.json "$env:USERPROFILE\.config\zed\themes\"
 ```
 
-然后 `Ctrl+Shift+P` → `theme selector` → **Alice Sunny**。深色版 `zed_alice_rainy.json` / `zed_alice_nightly.json` 同样放进该目录，主题名显示为 **Alice Rainy** / **Alice Nightly**（`appearance: dark`）。
+然后 `Ctrl+Shift+P` → `theme selector` → **Alice Sunny / Alice Rainy / Alice Nightly**（主题名来自 JSON 内部 `name`，与文件名无关）。
 
 ### VS Code
 
-扩展目录已备好，任选其一：
+`vscode/` 下是三个可直接安装的扩展。任选一种：
 
+```bash
+# 方式 A：本地安装（推荐，跨平台）
+code --install-extension <repo>/vscode/alice-sunny          # 也可指向 alice-rainy / alice-nightly
+# 或在 VS Code 里 Ctrl+Shift+P → "Developer: Install Extension from Location..." 选择对应文件夹
+```
 ```powershell
-code vscode-alice-sunny
-# Ctrl+Shift+P → "Developer: Install Extension from Location..."
-# 选中 vscode-alice-sunny 文件夹 → 重载窗口 → Ctrl+K Ctrl+T → Alice Sunny
+code --install-extension <repo>\vscode\alice-sunny
 ```
 
-或用 vsce 打包：
-
-```powershell
-cd vscode-alice-sunny
+```bash
+# 方式 B：打包成 VSIX
+cd <repo>/vscode/alice-sunny
 npx @vscode/vsce package
 code --install-extension alice-sunny-1.0.0.vsix
 ```
 
-深色版为 `vscode-alice-rainy/` / `vscode-alice-nightly/`（`uiTheme: vs-dark`），安装方式同上。
+安装后 `Ctrl+K Ctrl+T` → **Alice Sunny / Rainy / Nightly**。
 
 ### OpenCode
 
+主题名 = 文件名（去 `.json`）。
+
+```bash
+mkdir -p ~/.config/opencode/themes && cp <repo>/opencode/*.json ~/.config/opencode/themes/
+```
 ```powershell
-Copy-Item opencode_alice_sunny.json "$env:USERPROFILE\.config\opencode\themes\opencode_alice_sunny.json"
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\opencode\themes" | Out-Null
+Copy-Item <repo>\opencode\*.json "$env:USERPROFILE\.config\opencode\themes\"
 ```
 
-然后 TUI 里 `/theme` 选择，或在 `opencode.json` / `tui.json` 里写 `"theme": "opencode_alice_sunny"`。深色版为 `opencode_alice_rainy` / `opencode_alice_nightly`。
+TUI 里 `/theme` 选择，或在 `opencode.json` / `tui.json` 写 `"theme": "alice-sunny"`。
 
 ### Claude Code
 
-需要 v2.1.118+：
+需要 v2.1.118+。文件名（去 `.json`）= 主题 slug。
 
+```bash
+mkdir -p ~/.claude/themes && cp <repo>/claude/*.json ~/.claude/themes/
+```
 ```powershell
-Copy-Item claude_alice_sunny.json "$env:USERPROFILE\.claude\themes\alice_sunny.json"
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\themes" | Out-Null
+Copy-Item <repo>\claude\*.json "$env:USERPROFILE\.claude\themes\"
 ```
 
-然后 `/theme` → **Alice Sunny**（文件热重载，改色即时生效）。注意 Claude Code 不绘制终端背景，建议搭配 WezTerm 版一起用才是完整观感。Sunny 的 `base` 为 `light`；深色版 `claude_alice_rainy.json` / `claude_alice_nightly.json` 的 `base` 为 `dark`。
+`/theme` → **Alice Sunny / Rainy / Nightly**（文件热重载）。注意 Claude Code 不绘制终端背景，建议搭配 WezTerm 版一起用才是完整观感。Sunny 的 `base` 为 `light`，Rainy/Nightly 为 `dark`。
 
 ### JetBrains
 
-Settings → Editor → Color Scheme → ⚙ → **Import Scheme** → 选 `jetbrains_alice_sunny.icls`。
-`.icls` 继承 IDE 默认浅色方案，只覆盖本主题定义的部分（编辑器、控制台 ANSI、诊断波浪线、括号匹配等），UI 框架保持系统默认浅色。深色版 `jetbrains_alice_rainy.icls` / `jetbrains_alice_nightly.icls` 继承 **Darcula**。
+Settings → Editor → Color Scheme → ⚙ → **Import Scheme** → 选择 `<repo>/jetbrains/alice-sunny.icls`（或 `alice-rainy.icls` / `alice-nightly.icls`）。
+
+`.icls` 继承 IDE 默认方案（Sunny 继承 `Default`，深色继承 `Darcula`），只覆盖编辑器、控制台 ANSI、诊断波浪线、括号匹配等，UI 框架保持系统默认。
 
 ### Vim / Neovim
 
-经典 colorscheme（Vimscript），Vim 与 Neovim 通用，真彩 + 自动 256 色回退：
+Vimscript 经典 colorscheme，Vim 与 Neovim 通用，真彩 + 自动 256 色回退。colorscheme 名 = 文件名（去 `.vim`）。
 
+```bash
+# Vim — macOS / Linux
+mkdir -p ~/.vim/colors ~/.vim/lua/lualine/themes
+cp <repo>/vim/colors/*.vim ~/.vim/colors/
+cp <repo>/vim/lua/lualine/themes/*.lua ~/.vim/lua/lualine/themes/
+
+# Neovim — macOS / Linux
+mkdir -p ~/.config/nvim/colors ~/.config/nvim/lua/lualine/themes
+cp <repo>/vim/colors/*.vim ~/.config/nvim/colors/
+cp <repo>/vim/lua/lualine/themes/*.lua ~/.config/nvim/lua/lualine/themes/
+```
 ```powershell
-Copy-Item vim-alice\colors\*.vim "$env:USERPROFILE\.vim\colors\"          # Vim (Windows)
-# Neovim: 放到 stdpath('config')/colors/ 下
+# Vim — Windows
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.vim\colors" | Out-Null
+Copy-Item <repo>\vim\colors\*.vim "$env:USERPROFILE\.vim\colors\"
+
+# Neovim — Windows
+New-Item -ItemType Directory -Force "$env:LOCALAPPDATA\nvim\colors" | Out-Null
+Copy-Item <repo>\vim\colors\*.vim "$env:LOCALAPPDATA\nvim\colors\"
 ```
 
+启用：
+
 ```vim
-colorscheme alice_sunny    " 或 alice_rainy / alice_nightly
+colorscheme alice-sunny    " 或 alice-rainy / alice-nightly
 ```
 
 自动设置 `background`（Sunny=light，Rainy/Nightly=dark）与终端 ANSI（`g:terminal_color_0..15`）；内置 Treesitter 组链接、诊断高亮、`@rainbow.level1–6` 彩虹括号（配合 rainbow-delimiters.nvim）。
 
-**内置插件高亮**（约 300 组）：telescope、nvim-tree、neo-tree、which-key、gitsigns、indent-blankline（v2+v3）、lazy.nvim、mason、nvim-notify、trouble、dashboard/alpha、bufferline、nvim-cmp、**blink.cmp**（含 25 种 Kind）、**dropbar.nvim**（含 WinBar）、flash、hop、leap、mini.*、barbecue/navic、nvim-scrollbar 等。
+**内置插件高亮**（约 300 组）：telescope、nvim-tree、neo-tree、which-key、gitsigns、indent-blankline（v2+v3）、lazy.nvim、mason、nvim-notify、trouble、dashboard/alpha、bufferline、nvim-cmp、blink.cmp（含 25 种 Kind）、dropbar.nvim（含 WinBar）、flash、hop、leap、mini.*、barbecue/navic、nvim-scrollbar 等。
 
-**lualine**：主题文件随包附带，把 `vim-alice` 整个目录加入 runtimepath 后即可：
+**lualine**：主题文件随包附带，随 colors 一起放进 `lua/lualine/themes/` 后：
 
 ```lua
-require('lualine').setup({ options = { theme = 'alice_rainy' } })
+require('lualine').setup({ options = { theme = 'alice-sunny' } })  -- 或 alice-rainy / alice-nightly
 ```
 
 模式色沿用 Helix 状态栏约定：normal=蓝(acc1)、insert=红、visual=紫、replace=金、command=青、terminal=绿。
@@ -238,5 +307,6 @@ require('lualine').setup({ options = { theme = 'alice_rainy' } })
 ## 备注
 
 - 所有派生色（hover/active/border/dim/半透明底）均由 OKLCH 计算，改基色后可整组重推。
-- `num == 数字` 与 `warn` 有意做了微差（暖度 + 明度），诊断色不再和数字完全撞色。
+- `num` 与 `warn` 有意做了微差（暖度 + 明度），诊断色不再和数字完全撞色。
 - VS Code 的运算符强制正体（规则置于 tokenColors 末位并配 semanticTokenColors），不受关键字斜体影响。
+- `helix/legacy/alice-sunny-v1.toml` 为最初版本，使用旧调色板，仅供留档，请勿使用。
