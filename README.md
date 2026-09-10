@@ -1,6 +1,8 @@
 # Alice 系列
 
-一个以 **AliceBlue** 家族为底的终端/编辑器配色系列，覆盖 Helix、WezTerm、Zed、VS Code、OpenCode、Claude Code、JetBrains 七个平台，各平台保持同一套调色板与视觉语言。
+一个以 **AliceBlue** 家族为底，**90%为Vibe coding生成**的终端/编辑器配色系列，覆盖 Helix、WezTerm、Zed、VS Code、OpenCode、Claude Code、JetBrains、Vim/Neovim 八个平台，各平台保持同一套调色板与视觉语言。
+
+仅自用，不喜勿喷！
 
 | 主题 | 底色 | 基调 |
 |---|---|---|
@@ -16,7 +18,7 @@
 - **同色系压深**：所有颜色只调整明度/饱和度、不动色相——蓝（240°）、紫（304°）、绿（169°）、金（78°）、玫瑰（353°）五大色相家族贯穿全部主题与平台。
 - **墨字/浅字铺彩底**：浅色版彩色块用深墨字 `#1f2f3a`；深色版反过来用浅字 `txt2`（acc2 底 + 白字 4.29）。
 - **light-\* 两套约定**：浅色主题里 ANSI bright 靠"更饱和"强调（更浅会隐形）；深色主题回归常规"更亮"。
-- **彩虹括号**：六层嵌套按 蓝→紫→绿→金→玫瑰→灰/注释 循环。
+- **彩虹括号**：六层嵌套按 蓝→紫→绿→金→玫瑰→注释 循环（全平台统一）。
 
 ## 调色板
 
@@ -78,6 +80,8 @@ vscode-alice-rainy/ / vscode-alice-nightly/
 opencode_alice_rainy.json / opencode_alice_nightly.json
 claude_alice_rainy.json / claude_alice_nightly.json
 jetbrains_alice_rainy.icls / jetbrains_alice_nightly.icls
+vim-alice/colors/               Vim / Neovim 通用配色（三主题，含常见插件高亮）
+vim-alice/lua/lualine/themes/   lualine.nvim 主题（三主题）
 ```
 
 ## 深色主题
@@ -189,16 +193,45 @@ Copy-Item claude_alice_sunny.json "$env:USERPROFILE\.claude\themes\alice_sunny.j
 Settings → Editor → Color Scheme → ⚙ → **Import Scheme** → 选 `jetbrains_alice_sunny.icls`。
 `.icls` 继承 IDE 默认浅色方案，只覆盖本主题定义的部分（编辑器、控制台 ANSI、诊断波浪线、括号匹配等），UI 框架保持系统默认浅色。深色版 `jetbrains_alice_rainy.icls` / `jetbrains_alice_nightly.icls` 继承 **Darcula**。
 
+### Vim / Neovim
+
+经典 colorscheme（Vimscript），Vim 与 Neovim 通用，真彩 + 自动 256 色回退：
+
+```powershell
+Copy-Item vim-alice\colors\*.vim "$env:USERPROFILE\.vim\colors\"          # Vim (Windows)
+# Neovim: 放到 stdpath('config')/colors/ 下
+```
+
+```vim
+colorscheme alice_sunny    " 或 alice_rainy / alice_nightly
+```
+
+自动设置 `background`（Sunny=light，Rainy/Nightly=dark）与终端 ANSI（`g:terminal_color_0..15`）；内置 Treesitter 组链接、诊断高亮、`@rainbow.level1–6` 彩虹括号（配合 rainbow-delimiters.nvim）。
+
+**内置插件高亮**（约 300 组）：telescope、nvim-tree、neo-tree、which-key、gitsigns、indent-blankline（v2+v3）、lazy.nvim、mason、nvim-notify、trouble、dashboard/alpha、bufferline、nvim-cmp、**blink.cmp**（含 25 种 Kind）、**dropbar.nvim**（含 WinBar）、flash、hop、leap、mini.*、barbecue/navic、nvim-scrollbar 等。
+
+**lualine**：主题文件随包附带，把 `vim-alice` 整个目录加入 runtimepath 后即可：
+
+```lua
+require('lualine').setup({ options = { theme = 'alice_rainy' } })
+```
+
+模式色沿用 Helix 状态栏约定：normal=蓝(acc1)、insert=红、visual=紫、replace=金、command=青、terminal=绿。
+
 ## 平台间对应关系
 
-| 角色 | Helix | WezTerm | Zed | VS Code | OpenCode | Claude Code | JetBrains |
-|---|---|---|---|---|---|---|---|
-| 背景 / 正文 | bg1 / txt1 | background / foreground | editor.background / editor.foreground | editor.background / editor.foreground | background / text | text（背景由终端负责） | DEFAULT_TEXT |
-| 光标行 | cursorline | — | editor.active_line.background | editor.lineHighlightBackground | — | — | CARET_ROW_COLOR |
-| 彩虹括号 | `rainbow` 数组 | ansi | editor.document_highlight.bracket_background | editorBracketHighlight.foreground1–6 | syntaxPunctuation | rainbow_* | MATCHED_BRACE_ATTRIBUTES* |
-| 搜索命中 | ui.highlight（黄底） | — | search.match_background | editor.findMatchHighlightBackground | textHighlighted | selectionBg | SEARCH_RESULT_ATTRIBUTES |
-| 状态栏 | acc2 底 + 墨字 | — | statusBar.background | statusBar.background | primary | claude | — |
-| 终端 16 色 | — | ansi / brights | terminal.ansi.* | terminal.ansi* | — | — | CONSOLE_*_OUTPUT |
+| 角色 | Helix | WezTerm | Zed | VS Code | OpenCode | Claude Code | JetBrains | Vim/Neovim |
+|---|---|---|---|---|---|---|---|---|
+| 背景 / 正文 | bg1 / txt1 | background / foreground | editor.background / editor.foreground | editor.background / editor.foreground | background / text | text（背景由终端负责） | DEFAULT_TEXT | Normal |
+| 光标 | acc1 实底 | cursor_bg | players[0].cursor | editorCursor.foreground | primary | claude | CARET_COLOR | Cursor |
+| 选区 | acc2 实底 | selection_bg | players[0].selection | editor.selectionBackground | backgroundElement | selectionBg | SELECTION_BACKGROUND | Visual |
+| 光标行 | cursorline | — | editor.active_line.background | editor.lineHighlightBackground | — | — | CARET_ROW_COLOR | CursorLine |
+| 彩虹括号 | `rainbow` 数组 | ansi | editor.document_highlight.bracket_background | editorBracketHighlight.foreground1–6 | syntaxPunctuation | rainbow_* | MATCHED_BRACE_ATTRIBUTES* | @rainbow.level1–6 |
+| 搜索命中 | ui.highlight（黄底） | — | search.match_background | editor.findMatchHighlightBackground | textHighlighted | selectionBg | SEARCH_RESULT_ATTRIBUTES | Search / IncSearch |
+| 状态栏 | acc2 底 + 浅字 | — | statusBar.background | statusBar.background | primary | claude | — | StatusLine |
+| 终端 16 色 | — | ansi / brights | terminal.ansi.* | terminal.ansi* | — | — | CONSOLE_*_OUTPUT | g:terminal_color_0–15 |
+
+全平台统一约定：**光标 = acc1 实底**、**选区 = acc2 实底**、**彩虹第 6 级 = 注释色**。
 
 \* JetBrains 彩虹括号为单色括号 + 匹配块高亮，多级彩虹依赖 IDE 内置功能。
 

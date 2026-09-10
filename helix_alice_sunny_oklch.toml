@@ -11,7 +11,7 @@
 
 "ui.cursor" = { fg = "txt2", bg = "acc1" }
 "ui.cursor.match" = { fg = "txt2", bg = "green" }
-"ui.selection" = { bg = "acc2" }
+"ui.selection" = { fg = "txt2", bg = "acc2" }
 "ui.selection.primary" = { bg = "acc1" }
 
 # cursor line
@@ -115,7 +115,7 @@ rainbow = [
   "str",  # 2  green
   "num",  # 3  gold
   "err",  # 4  rose
-  "gray", # 5  neutral
+  "comm", # 5  neutral
 ]
 
 [palette]

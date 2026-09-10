@@ -318,7 +318,49 @@
           "info": {
             "color": "#65B095"
           }
-        }
+        },
+        "players": [
+          {
+            "cursor": "#56A0D1FF",
+            "background": "#56A0D1FF",
+            "selection": "#5B7F92FF"
+          },
+          {
+            "cursor": "#A280CBFF",
+            "background": "#A280CBFF",
+            "selection": "#A280CB3D"
+          },
+          {
+            "cursor": "#65B095FF",
+            "background": "#65B095FF",
+            "selection": "#65B0953D"
+          },
+          {
+            "cursor": "#BFA065FF",
+            "background": "#BFA065FF",
+            "selection": "#BFA0653D"
+          },
+          {
+            "cursor": "#BA829AFF",
+            "background": "#BA829AFF",
+            "selection": "#BA829A3D"
+          },
+          {
+            "cursor": "#71B6C9FF",
+            "background": "#71B6C9FF",
+            "selection": "#71B6C93D"
+          },
+          {
+            "cursor": "#B88FD5FF",
+            "background": "#B88FD5FF",
+            "selection": "#B88FD53D"
+          },
+          {
+            "cursor": "#C49A55FF",
+            "background": "#C49A55FF",
+            "selection": "#C49A553D"
+          }
+        ]
       }
     }
   ]
