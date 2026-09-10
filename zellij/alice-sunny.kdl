@@ -1,0 +1,120 @@
+themes {
+    alice-sunny {
+        text_unselected {
+            base 59 59 59
+            background 240 248 255
+            emphasis_0 86 160 209
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        text_selected {
+            base 31 47 58
+            background 91 127 146
+            emphasis_0 31 47 58
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        ribbon_unselected {
+            base 120 120 120
+            background 218 226 233
+            emphasis_0 86 160 209
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        ribbon_selected {
+            base 31 47 58
+            background 86 160 209
+            emphasis_0 31 47 58
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        frame_selected {
+            base 86 160 209
+            background 240 248 255
+            emphasis_0 86 160 209
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        frame_highlight {
+            base 181 133 50
+            background 240 248 255
+            emphasis_0 181 133 50
+            emphasis_1 86 160 209
+            emphasis_2 136 104 174
+            emphasis_3 79 122 106
+        }
+        list_unselected {
+            base 59 59 59
+            background 240 248 255
+            emphasis_0 86 160 209
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        list_selected {
+            base 31 47 58
+            background 91 127 146
+            emphasis_0 31 47 58
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        table_title {
+            base 86 160 209
+            background 218 226 233
+            emphasis_0 86 160 209
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        table_cell_unselected {
+            base 59 59 59
+            background 240 248 255
+            emphasis_0 86 160 209
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        table_cell_selected {
+            base 31 47 58
+            background 91 127 146
+            emphasis_0 31 47 58
+            emphasis_1 136 104 174
+            emphasis_2 79 122 106
+            emphasis_3 181 133 50
+        }
+        exit_code_success {
+            base 79 122 106
+            background 240 248 255
+            emphasis_0 79 122 106
+            emphasis_1 86 160 209
+            emphasis_2 136 104 174
+            emphasis_3 181 133 50
+        }
+        exit_code_error {
+            base 165 106 131
+            background 240 248 255
+            emphasis_0 165 106 131
+            emphasis_1 181 133 50
+            emphasis_2 86 160 209
+            emphasis_3 136 104 174
+        }
+        multiplayer_user_colors {
+            player_1 86 160 209
+            player_2 136 104 174
+            player_3 79 122 106
+            player_4 165 122 46
+            player_5 165 106 131
+            player_6 120 158 177
+            player_7 203 160 227
+            player_8 181 133 50
+            player_9 201 152 174
+            player_10 86 160 209
+        }
+    }
+}

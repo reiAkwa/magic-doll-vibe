@@ -1,6 +1,6 @@
 # Alice 系列（magic-doll-vibe）
 
-一个以 **AliceBlue** 家族为底，**90% 为 Vibe coding 生成**的终端/编辑器配色系列，覆盖 8 个平台，各平台保持同一套调色板与视觉语言。
+一个以 **AliceBlue** 家族为底，**90% 为 Vibe coding 生成**的终端/编辑器配色系列，覆盖 9 个平台，各平台保持同一套调色板与视觉语言。
 
 仅自用，不喜勿喷！
 
@@ -74,6 +74,10 @@ magic-doll-vibe/
 │   ├── alice-sunny.toml
 │   ├── alice-rainy.toml
 │   └── alice-nightly.toml
+├── zellij/
+│   ├── alice-sunny.kdl
+│   ├── alice-rainy.kdl
+│   └── alice-nightly.kdl
 ├── zed/
 │   ├── alice-sunny.json
 │   ├── alice-rainy.json
@@ -175,6 +179,29 @@ mkdir -p ~/.config/wezterm/colors && cp <repo>/wezterm/*.toml ~/.config/wezterm/
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\wezterm\colors" | Out-Null
 Copy-Item <repo>\wezterm\*.toml "$env:USERPROFILE\.config\wezterm\colors\"
 ```
+
+### Zellij
+
+主题名 = 文件名（去 `.kdl`），即 `alice-sunny` / `alice-rainy` / `alice-nightly`。
+
+```bash
+# macOS / Linux
+mkdir -p ~/.config/zellij/themes
+cp <repo>/zellij/*.kdl ~/.config/zellij/themes/
+```
+```powershell
+# Windows
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\zellij\themes" | Out-Null
+Copy-Item <repo>\zellij\*.kdl "$env:USERPROFILE\.config\zellij\themes\"
+```
+
+`~/.config/zellij/config.kdl`（Windows 为 `%USERPROFILE%\.config\zellij\config.kdl`）：
+
+```kdl
+theme "alice-sunny"      // 或 alice-rainy / alice-nightly
+```
+
+Zellij 会自动读取 themes 目录下的 `.kdl`；也可直接把 `themes { ... }` 内容并入 `config.kdl`。
 
 ### Zed
 
@@ -289,16 +316,16 @@ require('lualine').setup({ options = { theme = 'alice-sunny' } })  -- 或 alice-
 
 ## 平台间对应关系
 
-| 角色 | Helix | WezTerm | Zed | VS Code | OpenCode | Claude Code | JetBrains | Vim/Neovim |
-|---|---|---|---|---|---|---|---|---|
-| 背景 / 正文 | bg1 / txt1 | background / foreground | editor.background / editor.foreground | editor.background / editor.foreground | background / text | text（背景由终端负责） | DEFAULT_TEXT | Normal |
-| 光标 | acc1 实底 | cursor_bg | players[0].cursor | editorCursor.foreground | primary | claude | CARET_COLOR | Cursor |
-| 选区 | acc2 实底 | selection_bg | players[0].selection | editor.selectionBackground | backgroundElement | selectionBg | SELECTION_BACKGROUND | Visual |
-| 光标行 | cursorline | — | editor.active_line.background | editor.lineHighlightBackground | — | — | CARET_ROW_COLOR | CursorLine |
-| 彩虹括号 | `rainbow` 数组 | ansi | editor.document_highlight.bracket_background | editorBracketHighlight.foreground1–6 | syntaxPunctuation | rainbow_* | MATCHED_BRACE_ATTRIBUTES* | @rainbow.level1–6 |
-| 搜索命中 | ui.highlight（黄底） | — | search.match_background | editor.findMatchHighlightBackground | textHighlighted | selectionBg | SEARCH_RESULT_ATTRIBUTES | Search / IncSearch |
-| 状态栏 | acc2 底 + 浅字 | — | statusBar.background | statusBar.background | primary | claude | — | StatusLine |
-| 终端 16 色 | — | ansi / brights | terminal.ansi.* | terminal.ansi* | — | — | CONSOLE_*_OUTPUT | g:terminal_color_0–15 |
+| 角色 | Helix | WezTerm | Zellij | Zed | VS Code | OpenCode | Claude Code | JetBrains | Vim/Neovim |
+|---|---|---|---|---|---|---|---|---|---|
+| 背景 / 正文 | bg1 / txt1 | background / foreground | text_unselected | editor.background / editor.foreground | editor.background / editor.foreground | background / text | text（背景由终端负责） | DEFAULT_TEXT | Normal |
+| 光标 | acc1 实底 | cursor_bg | — | players[0].cursor | editorCursor.foreground | primary | claude | CARET_COLOR | Cursor |
+| 选区 | acc2 实底 | selection_bg | text_selected | players[0].selection | editor.selectionBackground | backgroundElement | selectionBg | SELECTION_BACKGROUND | Visual |
+| 光标行 | cursorline | — | — | editor.active_line.background | editor.lineHighlightBackground | — | — | CARET_ROW_COLOR | CursorLine |
+| 彩虹括号 | `rainbow` 数组 | ansi | — | editor.document_highlight.bracket_background | editorBracketHighlight.foreground1–6 | syntaxPunctuation | rainbow_* | MATCHED_BRACE_ATTRIBUTES* | @rainbow.level1–6 |
+| 搜索命中 | ui.highlight（黄底） | — | — | search.match_background | editor.findMatchHighlightBackground | textHighlighted | selectionBg | SEARCH_RESULT_ATTRIBUTES | Search / IncSearch |
+| 状态栏 | acc2 底 + 浅字 | — | ribbon_selected / frame_selected | statusBar.background | statusBar.background | primary | claude | — | StatusLine |
+| 终端 16 色 | — | ansi / brights | — | terminal.ansi.* | terminal.ansi* | — | — | CONSOLE_*_OUTPUT | g:terminal_color_0–15 |
 
 全平台统一约定：**光标 = acc1 实底**、**选区 = acc2 实底**、**彩虹第 6 级 = 注释色**。
 
