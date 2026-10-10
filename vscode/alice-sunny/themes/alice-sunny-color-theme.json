@@ -554,7 +554,8 @@
         "punctuation.separator.key-value"
       ],
       "settings": {
-        "foreground": "#787878"
+        "foreground": "#787878",
+        "fontStyle": ""
       }
     }
   ],
