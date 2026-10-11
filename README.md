@@ -10,15 +10,15 @@
 | **Alice Rainy** | `#1f252a` | 深色 · 冷灰蓝 · 低饱和（阴雨感） |
 | **Alice Nightly** | `#090e12` | 深色 · 近纯黑 · 高对比（深夜感） |
 
-三个主题共享同一组**强调色**：`acc1 = #56a0d1`、`acc2 = #5b7f92` 逐字节一致；`acc3` 浅色版为 `#8868ae`，深色版统一提亮到 `#a280cb`（只做文字色、不影响色块）。
+三个主题共享同一组**强调色**：`acc1 = #56a0d1`、`acc2 = #5b7f92` 跨平台取值一致（仅大小写写法可能不同）；`acc3` 浅色版为 `#8868ae`，深色版统一提亮到 `#a280cb`（只做文字色、不影响色块）。
 
 ## 设计思路
 
-- **亮度锚点**：浅色版以 `bg1`（L≈0.975）和 `acc1`（L≈0.678）为基准；深色版整体反转——bg 落在 L 0.13–0.26、文字档 L 0.70–0.75、彩底用浅字（`txt2`）。代码前景色对 bg1 对比度 Rainy ≥4.7、Nightly ≥4.5。
+- **亮度锚点**：浅色版以 `bg1`（L≈0.975）和 `acc1`（L≈0.678）为基准；深色版整体反转——bg 落在 L 0.16–0.33（Nightly 0.16–0.22、Rainy 0.26–0.33）、文字档 L 0.86–0.98。状态栏 / 缓冲区 / 菜单等彩底用浅字 `txt2`，诊断彩底走终端墨色 `black`。代码前景色对 bg1 对比度：Nightly 全部 ≥4.5；Rainy 除 `acc2`（3.61，低于 AA）外均 ≥4.7。
 - **同色系压深**：所有颜色只调整明度/饱和度、不动色相——蓝（240°）、紫（304°）、绿（169°）、金（78°）、玫瑰（353°）五大色相家族贯穿全部主题与平台。
-- **墨字/浅字铺彩底**：浅色版彩色块用深墨字 `#1f2f3a`；深色版反过来用浅字 `txt2`（acc2 底 + 白字 4.29）。
-- **light-\* 两套约定**：浅色主题里 ANSI bright 靠"更饱和"强调（更浅会隐形）；深色主题回归常规"更亮"。
-- **彩虹括号**：六层嵌套按 蓝→紫→绿→金→玫瑰→注释 循环（全平台统一）。
+- **墨字/浅字铺彩底**：浅色版彩色块用深墨字 `#1f2f3a`；深色版反过来用浅字 `txt2`。选区（`acc2` 底 + `txt2`）对比度 Sunny 3.21 / Rainy 3.81 / Nightly 4.06。
+- **light-\* 两套约定**：浅色主题里 ANSI bright 靠"更饱和"强调（更浅会隐形）；深色主题回归常规"更亮"。`black` / `gray` 因可读性例外，bright 档会略提亮。
+- **彩虹括号**：六层嵌套按 蓝→紫→绿→金→玫瑰→注释 循环。Helix / VS Code / Claude Code / Vim·Neovim 为真正的 6 级彩虹；Zed 仅单色括号匹配底色，JetBrains 为单色括号 + 匹配块高亮。
 
 ## 调色板
 
@@ -57,7 +57,7 @@
 | cyan | `#789eb1` | `#56A3C4` |
 | gray/white | `#a8b4c0` | `#BAC6D1` |
 
-bright 与基色**同明度、高饱和**；WezTerm/Zed 的 dim 档为 OKLCH L−0.06 的衍生色。
+彩色档（red/green/yellow/blue/magenta/cyan）bright 与基色**同明度、高饱和**（ΔL ≤0.01）；`black` / `gray` 的 bright 因可读性略提亮。Zed 的 `dim_*` 档为 OKLCH L−0.06 的衍生色（`dim_black` 例外，为提亮）。
 
 ## 目录结构
 
@@ -312,7 +312,7 @@ colorscheme alice-sunny    " 或 alice-rainy / alice-nightly
 require('lualine').setup({ options = { theme = 'alice-sunny' } })  -- 或 alice-rainy / alice-nightly
 ```
 
-模式色沿用 Helix 状态栏约定：normal=蓝(acc1)、insert=红、visual=紫、replace=金、command=青、terminal=绿。
+模式色：normal=蓝(acc1)、insert=红(red)、visual=紫(acc3)、replace=金(num)、command=青(cyan)、terminal=绿(green)。注意 Helix 本体的状态栏只有三档（normal=蓝、insert=红、select=绿），与 lualine 的多模式配色并不完全对应。
 
 ## 平台间对应关系
 
@@ -327,13 +327,13 @@ require('lualine').setup({ options = { theme = 'alice-sunny' } })  -- 或 alice-
 | 状态栏 | acc2 底 + 浅字 | — | ribbon_selected / frame_selected | statusBar.background | statusBar.background | primary | claude | — | StatusLine |
 | 终端 16 色 | — | ansi / brights | — | terminal.ansi.* | terminal.ansi* | — | — | CONSOLE_*_OUTPUT | g:terminal_color_0–15 |
 
-全平台统一约定：**光标 = acc1 实底**、**选区 = acc2 实底**、**彩虹第 6 级 = 注释色**。
+全平台统一约定：**光标 = acc1 实底**、**彩虹第 6 级 = 注释色**。选区在 Helix / Zed / VS Code / Zellij / Claude Code 为 **acc2 实底**，OpenCode 走 `backgroundElement`。
 
-\* JetBrains 彩虹括号为单色括号 + 匹配块高亮，多级彩虹依赖 IDE 内置功能。
+\* JetBrains 彩虹括号为单色括号 + 匹配块高亮；Zed 仅有单色括号匹配底色（`editor.document_highlight.bracket_background`）。二者都不具备 6 级彩虹。
 
 ## 备注
 
-- 所有派生色（hover/active/border/dim/半透明底）均由 OKLCH 计算，改基色后可整组重推。
+- 除 Helix 的 dim 档（各主题文件末尾留有 `TODO`，尚未实现）外，所有派生色（hover/active/border/半透明底）均由 OKLCH 计算，改基色后可整组重推。
 - `num` 与 `warn` 有意做了微差（暖度 + 明度），诊断色不再和数字完全撞色。
 - VS Code 的运算符强制正体（规则置于 tokenColors 末位并配 semanticTokenColors），不受关键字斜体影响。
 - `helix/legacy/alice-sunny-v1.toml` 为最初版本，使用旧调色板，仅供留档，请勿使用。
